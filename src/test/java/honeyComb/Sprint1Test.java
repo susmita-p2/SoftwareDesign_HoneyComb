@@ -23,8 +23,8 @@ class Sprint1Test
 	Project Fire;
 	JobPosting SWE;
 	JobPosting DA;
-	NewsArticle NY;
 	NewsArticle WA;
+	NewsArticle NY;
 	
 	
 	
