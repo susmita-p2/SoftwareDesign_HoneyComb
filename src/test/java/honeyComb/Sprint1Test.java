@@ -156,82 +156,37 @@ class Sprint1Test
 		ArrayList<Page> vals3 = new ArrayList <Page>();
 		ArrayList<Page> vals4 = new ArrayList <Page>();
 	//Case: 1
-	   try
-			{
-				A.addLink("project", NY); //News article cannot be added as Project
-				fail("Cannot happen!");	
-			} catch (ClassIncompatibleException e)
-			{
-				e.printStackTrace();
-				System.out.println("threw exception!");
-			}
-	  //Case: 2
-	   try
-	   {
-			DA.addLink("skill", A);  //Person is not a skill
-			fail("Cannot happen!");	
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	  //Case:3
-	   try
-	   {
-			Meta.addLink("employer", Amazon); //Company cannot have an employer
-			fail("Cannot happen!");
-			
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	   //Case:4
-	   try
-	   {
-			Python.addLink("skill", A); //Skill page doesn't have a skill section
-			fail("Cannot happen!");
-			
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	   //Case:5
-	   try
-	   {
-		   Meta.addLink("employee", Amazon);// Company cannot be a employee
-			fail("Cannot happen!");
-			
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	   //Case:6
-	   try
-	   {
-		   Ice.addLink("contributor", Python); //Skill cannot be a contributor
-			fail("Cannot happen!");
-			
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	   //Case:7
-	   try
-	   {
-			Fire.addLink("contributor", SWE); //Only Person and Company can be contributor
-			fail("Cannot happen!");
-			
-	   } catch (ClassIncompatibleException e)
-	   {
-		    e.printStackTrace();
-			System.out.println("threw exception!");
-	   }
-	   
-
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {A.addLink("project", NY);}
+				);
+		
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {DA.addLink("skill", A); }
+				);
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {Meta.addLink("employer", Amazon);}
+				);
+		
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {Python.addLink("skill", A); }
+				);
+		
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {Meta.addLink("employee", Amazon);}
+				);
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {Ice.addLink("contributor", Python); }
+				);
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {Fire.addLink("contributor", SWE);}
+				);
+		
 		vals1.add(A);
 		vals1.add(B);
 		vals1.add(C);
@@ -363,7 +318,7 @@ class Sprint1Test
 		assertTrue(A.canView(Python));		
 	}
 	@Test
-	void test_editPermission()
+	void test_editPermission() 
 	{
 		try
 		{
@@ -390,15 +345,38 @@ class Sprint1Test
 			e.printStackTrace();
 			fail("Shouldn't happen!");
 		}
-		try
-		{
-			assertTrue(A.canEdit(Python));
-			
-		} catch (ClassIncompatibleException e)
-		{
-			e.printStackTrace();
-			System.out.println("threw exception!");
-		}
+	
+			//assertTrue(Python.page_links.get("editor"));
+			//assert(Python.getPage_links().containsKey("editor"));
+		
+			  try
+			{
+				Python.addLink("editor", A);
+			} catch (ClassIncompatibleException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		   // Python.addLink("viewer", B);
+		    Python.removeLink("editor", A);
+			assertTrue(Python.getLink("editor"));
+			//assertTrue(Python.getLink("editor"));
+			try
+			{
+				assertFalse(B.canEdit(Python));
+			} catch (ClassIncompatibleException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		
+		assertThrows(ClassIncompatibleException.class,  
+				() -> {A.canEdit(NY);}
+				);
+		assertFalse(Fire.getLink("mentor"));
+		assertTrue(Fire.getLink("editor"));
 		
 	}
 	

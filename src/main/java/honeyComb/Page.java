@@ -141,6 +141,14 @@ public abstract class Page
 		}
 		
 	}
+	public boolean getLink(String key)
+	{
+		if(this.page_links.containsKey(key))
+		{
+			return true;
+		}
+		return false;
+	}
 	public abstract String[]  getRolesHas();
 	public abstract String[] getRolesIs();
 
