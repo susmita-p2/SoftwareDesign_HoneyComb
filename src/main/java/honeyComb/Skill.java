@@ -4,7 +4,7 @@ package honeyComb;
 public class Skill extends Page
 {
 	final static String[] roles_is = { "skill"};
-	final static String[] roles_has = { "editor","following"};
+	final static String[] roles_has = { "editor","following", "mentor", "viewer"};
 	public Skill(String name, String description)
 	{
 		super(name, description);

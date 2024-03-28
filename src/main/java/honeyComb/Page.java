@@ -90,7 +90,7 @@ public abstract class Page
 
 	public boolean containsRole(String[] roles, String key)
 	{
-		//String[] roles = p.getRolesIs();
+	
 		for(int i = 0; i < roles.length; i++)
 		{
 			if (roles[i].toLowerCase() == key)
@@ -143,9 +143,6 @@ public abstract class Page
 	}
 	public abstract String[]  getRolesHas();
 	public abstract String[] getRolesIs();
-	public static void main(String[] args)
-	{
-		System.out.println("Page created!");
-	}
+
 		
 }

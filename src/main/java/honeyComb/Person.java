@@ -1,6 +1,6 @@
 package honeyComb;
 
-
+import java.util.ArrayList;
 
 public class Person extends Page
 {
@@ -8,8 +8,8 @@ public class Person extends Page
 	String pronoun;
 	String email;
 	String phone;
-	final static String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "following"};
-	final static String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "following"};
+	final static String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
+	final static String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
 	
 	public Person(String name, String description, String pronoun, String email, String phone)
 	{
@@ -82,6 +82,44 @@ public class Person extends Page
 	public void setPhone(String phone)
 	{
 		this.phone = phone;
+	}
+	
+	public boolean canView(Page p)
+	{
+		ArrayList<Page> empty_arr = new ArrayList <Page>();
+		if (! p.page_links.containsKey("viewer"))
+		{
+			return true;
+		}
+		if (p.page_links.get("viewer").equals(empty_arr))
+		{
+			return true;
+		}
+		else
+		{
+			if (p.page_links.get("viewer").contains(this))
+			{
+				 return true;
+			}
+
+		}
+		return false;	
+	}
+	
+	public boolean canEdit(Page p) throws ClassIncompatibleException
+	{
+		if(p.page_links.containsKey("editor"))
+		{
+			if(p.page_links.get("editor").contains(this))
+			{
+				return true;
+			}
+			return false;
+		}
+		else
+		{
+			throw new ClassIncompatibleException();
+		}
 	}
 	
 	public String toString()

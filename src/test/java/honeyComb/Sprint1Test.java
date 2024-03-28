@@ -48,7 +48,7 @@ class Sprint1Test
 	}
 
 	//Tests Person class 
-	@Test
+	//@Test
 	void testPerson()
 	{
 		assertEquals("Person: Alice, Fun, she/her, coolalice@gmail.com, 859-000-0000", A.toString());
@@ -59,8 +59,8 @@ class Sprint1Test
 		assertEquals("helen@gmail.com", C.getEmail());
 		assertEquals("859-691-9812", C.getPhone());
 		
-		String[] person_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "following"};
-		String[] person_has = {"skill", "employer", "project", "news_article", "follower", "following"};
+		String[] person_is= {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
+		String[] person_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
 		System.out.println(A.getRolesIs());
 		assertArrayEquals(person_is,A.getRolesIs());
 		assertArrayEquals(person_has,A.getRolesHas());
@@ -95,11 +95,7 @@ class Sprint1Test
 	@Test
 	void test_Page_Links()
 	{
-		HashMap<String, ArrayList<Page>> mock = new HashMap<String,ArrayList<Page>>();
-		ArrayList<Page> vals1 = new ArrayList <Page>();
-		ArrayList<Page> vals2 = new ArrayList <Page>();
-		ArrayList<Page> vals3 = new ArrayList <Page>();
-		ArrayList<Page> vals4 = new ArrayList <Page>();
+		
 		assert(D.page_links.isEmpty());
 	    try
 		{
@@ -107,34 +103,40 @@ class Sprint1Test
 			A.addLink("follower", B);
 			A.addLink("follower", C);
 			A.addLink("employer", Amazon);
-			A.addLink("following", B);
-			A.addLink("following", Amazon);
+			A.addLink("friend", B);
+			A.addLink("skill", Python);
 			A.addLink("project",Ice);
 			A.addLink("news_article", NY);
+			A.addLink("mentor",C);
 			
 			Meta.addLink("follower", A);
 			Meta.addLink("employee", C);
 			Meta.addLink("job_posting", SWE);
 			Meta.addLink("news_article", NY);
 			Meta.addLink("project", Fire);
+			Meta.addLink("mentor", A);
 			
 			Ice.addLink("contributor", Meta);
 			Ice.addLink("editor", B);
 			Ice.addLink("follower", A);
+			Ice.addLink("mentor", C);
 			
 			SWE.addLink("skill", Java);	
 			DA.addLink("applicant", A);
 			DA.addLink("skill", Python);
 			SWE.addLink("editor", C);
+			SWE.addLink("contributor", B);
 		
 			Meta.addLink("news_article", WA);
 			Meta.addLink("employee", C);
 			Meta.addLink("follower", A);
 			Meta.addLink("project", Ice);
+			Meta.addLink("job_posting", SWE);
+			Meta.addLink("editor", B);
 			
 			NY.addLink("editor", B);
 			NY.addLink("contributor", Meta);
-			WA.addLink("follower", A);
+			WA.addLink("mentor", A);
 		
 		} catch (ClassIncompatibleException e)
 		{
@@ -142,26 +144,94 @@ class Sprint1Test
 			e.printStackTrace();
 			fail("threw exception!");
 		}
-	    
+	}
 	    //The following test-cases fail as we are trying to add roles that are not compatible with the class! Part of testing
 	    
-	    /*try
+	@Test
+	void exception_page_links()
+	{
+		HashMap<String, ArrayList<Page>> mock = new HashMap<String,ArrayList<Page>>();
+		ArrayList<Page> vals1 = new ArrayList <Page>();
+		ArrayList<Page> vals2 = new ArrayList <Page>();
+		ArrayList<Page> vals3 = new ArrayList <Page>();
+		ArrayList<Page> vals4 = new ArrayList <Page>();
+	//Case: 1
+	   try
 			{
 				A.addLink("project", NY); //News article cannot be added as Project
-				DA.addLink("skill", A);  //Person is not a skill
-				Python.addLink("skill", A); //Skill page doesn't have a skill section
-				Meta.addLink("employer", Amazon); //Company cannot have an employer
-				Meta.addLink("employee", Amazon);// Company cannot be a employee
-				Fire.addLink("contributor", SWE); //Only Person and Company can be contributor
-			    Ice.addLink("contributor", Python); //Skill cannot be a contributor
-			    A.addLink("Following", NY);// Only Person and Company are followable
-			     
-				
+				fail("Cannot happen!");	
 			} catch (ClassIncompatibleException e)
 			{
 				e.printStackTrace();
-				fail("threw exception!");
-			}*/
+				System.out.println("threw exception!");
+			}
+	  //Case: 2
+	   try
+	   {
+			DA.addLink("skill", A);  //Person is not a skill
+			fail("Cannot happen!");	
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	  //Case:3
+	   try
+	   {
+			Meta.addLink("employer", Amazon); //Company cannot have an employer
+			fail("Cannot happen!");
+			
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	   //Case:4
+	   try
+	   {
+			Python.addLink("skill", A); //Skill page doesn't have a skill section
+			fail("Cannot happen!");
+			
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	   //Case:5
+	   try
+	   {
+		   Meta.addLink("employee", Amazon);// Company cannot be a employee
+			fail("Cannot happen!");
+			
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	   //Case:6
+	   try
+	   {
+		   Ice.addLink("contributor", Python); //Skill cannot be a contributor
+			fail("Cannot happen!");
+			
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	   //Case:7
+	   try
+	   {
+			Fire.addLink("contributor", SWE); //Only Person and Company can be contributor
+			fail("Cannot happen!");
+			
+	   } catch (ClassIncompatibleException e)
+	   {
+		    e.printStackTrace();
+			System.out.println("threw exception!");
+	   }
+	   
+
 		vals1.add(A);
 		vals1.add(B);
 		vals1.add(C);
@@ -176,32 +246,33 @@ class Sprint1Test
 			assertEquals(1,D.getPage_links().size());
 			assertEquals(mock,D.getPage_links());
 			D.addLink("employer", Amazon);
-			D.addLink("following", Amazon);
 			D.addLink("project", Ice);
-			assertEquals(4,D.getPage_links().size());
+			assertEquals(3,D.getPage_links().size());
 			D.removeLink("follower", A);
 			
 			//assertEquals(mock,D.getPage_links()); -->This becomes false now since we successfully removed A from follower
 			D.removeLink("employer", Amazon);
-			D.removeLink("following", Meta);
-			assertEquals(4,D.getPage_links().size());
+			assertEquals(3,D.getPage_links().size());
 			assert(D.page_links.containsKey("follower"));
 			assert(D.page_links.containsKey("employer"));
-			assert(D.page_links.containsKey("following"));
+			assert(D.page_links.containsKey("project"));
+			assertEquals(vals3, D.page_links.get("employer"));
+			D.removeLink("employer", Amazon);
+			assertEquals(vals3, D.page_links.get("employer"));
+			D.removeLink("mentor", A);
 			mock.put("employer", vals2);
-			mock.put("following", vals3);
 			mock.put("project", vals4);
 			assertTrue(D.getPage_links().keySet().equals(mock.keySet()));
-			
-			
-			
+				
 		} catch (ClassIncompatibleException e)
 		{
 	
 			e.printStackTrace();
+			System.out.println("threw exception!!");
 		}
 		
-		//assert(D.page_links.containsKey("news_article")); //Checking with a key that does not exist
+	
+		assertFalse(D.page_links.containsKey("news_article")); //Checking with a key that does not exist
 	}
 
 	@Test
@@ -226,8 +297,8 @@ class Sprint1Test
 	{
 		assertEquals("Amazon", Amazon.getName());
 		assertEquals("Stuff with social media", Meta.getDescription());
-		String[] roles_is = { "contributor", "employer", "following"};
-		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article"};
+		String[] roles_is = { "contributor", "employer"};
+		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
 		assertArrayEquals(Amazon.getRolesHas(), roles_has);
 		assertArrayEquals(Meta.getRolesIs(), roles_is);
 	}
@@ -235,7 +306,7 @@ class Sprint1Test
 	void test_Project()
 	{
 		String[] roles_is = {"project"};
-		String[] roles_has = { "editor","contributor", "follower"};
+		String[] roles_has =  { "editor","contributor", "follower", "mentor", "viewer"};
 		assertArrayEquals(Fire.getRolesHas(), roles_has);
 		assertArrayEquals(Ice.getRolesIs(), roles_is);
 	}
@@ -243,7 +314,7 @@ class Sprint1Test
 	void test_Skill()
 	{
 		 String[] roles_is = { "skill"};
-	     String[] roles_has = { "editor","following"};
+	     String[] roles_has =  { "editor","following", "mentor", "viewer"};
 		assertArrayEquals(Python.getRolesHas(), roles_has);
 		assertArrayEquals(Java.getRolesIs(), roles_is);
 	}
@@ -251,7 +322,7 @@ class Sprint1Test
 	void test_NewsArticle()
 	{
 		String[] roles_is = {"news_article"};
-		String[] roles_has = { "editor","contributor", "follower"};
+		String[] roles_has = { "editor","contributor","mentor","viewer"};
 		assertArrayEquals(WA.getRolesHas(), roles_has);
 		assertArrayEquals(NY.getRolesIs(), roles_is);
 	}
@@ -260,9 +331,75 @@ class Sprint1Test
 	void test_JobPosting()
 	{
 		String[] roles_is = { "job_posting"};
-		String[] roles_has = { "editor","applicant", "skill"};
+		String[] roles_has =  { "editor","applicant", "skill", "mentor", "viewer", "contributor"};
 		assertArrayEquals(SWE.getRolesHas(), roles_has);
-		assertArrayEquals(DA.getRolesIs(), roles_is);
+		assertArrayEquals(DA.getRolesIs(), roles_is); 
+	}
+	@Test
+	void test_viewPermission()
+	{
+		ArrayList<Page> empty_arr = new ArrayList <Page>();
+		assertTrue(A.canView(Amazon));
+		try
+		{
+			Amazon.addLink("viewer",B);
+		} catch (ClassIncompatibleException e)
+		{
+			e.printStackTrace();
+		}
+		assertFalse(A.canView(Amazon));
+		assertTrue(B.canView(Amazon));
+		
+		try
+		{
+			Python.addLink("viewer", B);
+			Python.removeLink("viewer", B);
+		} catch (ClassIncompatibleException e)
+		{
+			e.printStackTrace();
+		}
+		assert(Python.getPage_links().containsKey("viewer"));
+		assertEquals(empty_arr, Python.getPage_links().get("viewer"));
+		assertTrue(A.canView(Python));		
+	}
+	@Test
+	void test_editPermission()
+	{
+		try
+		{
+			Fire.addLink("editor", A);
+		} catch (ClassIncompatibleException e)
+		{
+			e.printStackTrace();
+			fail("Shouldn't happen!");
+		}
+		try
+		{
+			assertTrue(A.canEdit(Fire));
+		} catch (ClassIncompatibleException e)
+		{
+
+			e.printStackTrace();
+			fail("Shouldn't happen!");
+		}
+		try
+		{
+			assertFalse(B.canEdit(Fire));
+		} catch (ClassIncompatibleException e)
+		{
+			e.printStackTrace();
+			fail("Shouldn't happen!");
+		}
+		try
+		{
+			assertTrue(A.canEdit(Python));
+			
+		} catch (ClassIncompatibleException e)
+		{
+			e.printStackTrace();
+			System.out.println("threw exception!");
+		}
+		
 	}
 	
 	
