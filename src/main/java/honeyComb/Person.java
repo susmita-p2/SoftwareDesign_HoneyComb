@@ -8,17 +8,47 @@ public class Person extends Page
 	String pronoun;
 	String email;
 	String phone;
-	final static String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-	final static String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+	/**
+	 * @return the pronoun
+	 */
+	public String getPronoun()
+	{
+		return pronoun;
+	}
+	/**
+	 * @param pronoun the pronoun to set
+	 */
+	public void setPronoun(String pronoun)
+	{
+		this.pronoun = pronoun;
+	}
+	/**
+	 * @return the roles_is
+	 */
+	public String[] getRoles_is()
+	{
+		return roles_is;
+	}
+	/**
+	 * @return the roles_has
+	 */
+	public String[] getRoles_has()
+	{
+		return roles_has;
+	}
+	String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
+	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+	//String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
 	
-	public Person(String name, String description, String pronoun, String email, String phone)
+	public Person(String name, String description,  String pronoun, String email, String phone)
 	{
 		super(name, description);
 		this.pronoun = pronoun;
 		this.email = email;
 		this.phone = phone;
-	
+		//RestStorage.push_request(this);	
 	}
+	public Person() {}
 
 	@Override
 	public String[] getRolesHas()
@@ -126,6 +156,12 @@ public class Person extends Page
 	{
 		return "Person: " + name +", " +  description +", "+  pronoun + ", "+  email + ", " + phone;
 	}
-	
-	
+	public void setRoles_has(String[] roles_has)
+	{
+		this.roles_has = roles_has;
+	}
+	public void setRoles_is(String[] roles_is)
+	{
+		this.roles_is = roles_is;
+	}
 }

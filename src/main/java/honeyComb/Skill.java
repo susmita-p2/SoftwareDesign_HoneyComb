@@ -3,14 +3,14 @@ package honeyComb;
 
 public class Skill extends Page
 {
-	final static String[] roles_is = { "skill"};
-	final static String[] roles_has = { "editor","following", "mentor", "viewer"};
+	static String[] roles_is = { "skill"};
+	static String[] roles_has = { "editor","following", "mentor", "viewer"};
 	public Skill(String name, String description)
 	{
 		super(name, description);
 
 	}
-
+	public Skill() {}
 	@Override
 	public String[] getRolesHas()
 	{
@@ -23,5 +23,19 @@ public class Skill extends Page
 		
 		return roles_is;
 	}
-
+	/**
+	 * @param rolesIs the rolesIs to set
+	 */
+	public static void setRolesIs(String[] rolesIs)
+	{
+		roles_is = rolesIs;
+	}
+	/**
+	 * @param rolesHas the rolesHas to set
+	 */
+	public static void setRolesHas(String[] rolesHas)
+	{
+		roles_has = rolesHas;
+	}
+	
 }

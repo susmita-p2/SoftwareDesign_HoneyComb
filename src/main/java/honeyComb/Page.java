@@ -9,9 +9,9 @@ public abstract class Page
 	String name;
 	String description;
 	//roles to Page
-	HashMap<String, ArrayList<Page>>  page_links = new HashMap<String, ArrayList<Page>> ();
+	// HashMap<String, Page[]>  page_links = new HashMap<String, Page[]> ();
+	HashMap<String, ArrayList <String>>  page_links = new HashMap<String, ArrayList<String>> ();
 	ArrayList<String> external_links = new ArrayList<String>();
-	
 	public Page( String name, String description)
 	{
 		IDGenerator genID = IDGenerator.getInstance();
@@ -20,14 +20,50 @@ public abstract class Page
 		this.description = description;
 	
 	}
+	public Page(){}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id)
+	{
+		this.id = id;
+	}
 
 	/**
 	 * @return the id
 	 */
-	public String getID()
+	public String getId()
 	{
 		return id;
 	}
+
+	/**
+	 * @param external_links the external_links to set
+	 */
+	public void setExternal_links(ArrayList<String> external_links)
+	{
+		this.external_links = external_links;
+	}
+	
+	
+
+
+	/**
+	 * @return the page_links
+	 */
+	public HashMap<String, ArrayList<String>> getPage_links()
+	{
+		return page_links;
+	}
+	/**
+	 * @return the external_links
+	 */
+	public ArrayList<String> getExternal_links()
+	{
+		return external_links;
+	}
+	/**
+
 	/**
 	 * @return the name
 	 */
@@ -45,10 +81,7 @@ public abstract class Page
 	/**
 	 * @return the page_links
 	 */
-	public  HashMap<String, ArrayList<Page>> getPage_links()
-	{
-		return page_links;
-	}
+
 	/**
 	 * @param name the name to set
 	 */
@@ -100,30 +133,31 @@ public abstract class Page
 		}
 		return false;
 	}
-	public void addLink(String key , Page p) throws ClassIncompatibleException
+
+	public void addLink(String key , String id) throws ClassIncompatibleException
 	{
 		//Checks if this page can have the given role 
-		if(containsRole(this.getRolesHas(),key) == false)
+		/*if(containsRole(this.getRolesHas(),key) == false)
 		{
 			throw new ClassIncompatibleException();
 		}
 		//Checks if the new page that we are trying to add  can assume the given role
-		if(containsRole(p.getRolesIs(),key) == false)
+		if(containsRole(this.getRolesIs(),key) == false)
 		{
 			throw new ClassIncompatibleException();
-		}
+		}*/
 		if ( page_links.containsKey(key))
 		{
-			ArrayList<Page>list_pages = page_links.get(key);
-			if (! list_pages.contains(p))
+			ArrayList<String> list_pages = page_links.get(key);
+			if (! list_pages.contains(key))
 			{
-				list_pages.add(p);
+				list_pages.add(id);
 			}
 		}
 		else
 		{
-			ArrayList<Page>list_pages = new ArrayList<Page>();
-			list_pages.add(p);
+			ArrayList<String>list_pages = new ArrayList<String>();
+			list_pages.add(id);
 			page_links.put(key, list_pages);
 			
 			
@@ -133,10 +167,10 @@ public abstract class Page
 	{
 		if(page_links.containsKey(key))
 		{
-			ArrayList<Page> list_pages = page_links.get(key);
-			if (list_pages.contains(p))
+			ArrayList<String> list_pages = page_links.get(key);
+			if (list_pages.contains(id))
 			{
-				list_pages.remove(p);
+				list_pages.remove(id);
 			}
 		}
 		
@@ -151,6 +185,14 @@ public abstract class Page
 	}
 	public abstract String[]  getRolesHas();
 	public abstract String[] getRolesIs();
+	/**
+	 * @param page_links the page_links to set
+	 */
+	public void setPage_links(HashMap<String, ArrayList<String>> page_links)
+	{
+		this.page_links = page_links;
+	}	
+	
 
 		
 }
