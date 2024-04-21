@@ -55,13 +55,7 @@ public abstract class Page
 	{
 		return page_links;
 	}
-	/**
-	 * @return the external_links
-	 */
-	public ArrayList<String> getExternal_links()
-	{
-		return external_links;
-	}
+
 	/**
 
 	/**
@@ -126,7 +120,7 @@ public abstract class Page
 	
 		for(int i = 0; i < roles.length; i++)
 		{
-			if (roles[i].toLowerCase() == key)
+			if (roles[i].toLowerCase().equals(key))
 			{
 				return true;
 			}
@@ -134,43 +128,51 @@ public abstract class Page
 		return false;
 	}
 
-	public void addLink(String key , String id) throws ClassIncompatibleException
+	public void addLink(String key , Page p) throws ClassIncompatibleException
 	{
 		//Checks if this page can have the given role 
-		/*if(containsRole(this.getRolesHas(),key) == false)
+	
+		if(containsRole(this.getRolesHas(),key) == false)
 		{
 			throw new ClassIncompatibleException();
 		}
 		//Checks if the new page that we are trying to add  can assume the given role
-		if(containsRole(this.getRolesIs(),key) == false)
+		if(containsRole(p.getRolesIs(),key) == false)
 		{
 			throw new ClassIncompatibleException();
-		}*/
+		}
 		if ( page_links.containsKey(key))
 		{
 			ArrayList<String> list_pages = page_links.get(key);
-			if (! list_pages.contains(key))
+			String add_id = p.getId();
+			if (list_pages.contains(add_id))
+			{		
+				//System.out.println("Id already presents");
+			}
+			else
 			{
-				list_pages.add(id);
+				list_pages.add(add_id);
 			}
 		}
 		else
 		{
-			ArrayList<String>list_pages = new ArrayList<String>();
-			list_pages.add(id);
-			page_links.put(key, list_pages);
-			
-			
+			ArrayList<String>list_pages1 = new ArrayList<String>();
+			String id_page = p.getId();
+			//System.out.println(id_page);
+			list_pages1.add(id_page);
+			page_links.put(key, list_pages1);		
 		}
+		
+		//System.out.println(page_links);
 	}
 	public void removeLink(String key, Page p)
 	{
 		if(page_links.containsKey(key))
 		{
 			ArrayList<String> list_pages = page_links.get(key);
-			if (list_pages.contains(id))
+			if (list_pages.contains(p.getId()))
 			{
-				list_pages.remove(id);
+				list_pages.remove(p.getId());
 			}
 		}
 		

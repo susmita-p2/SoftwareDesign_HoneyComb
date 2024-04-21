@@ -92,7 +92,7 @@ class Sprint1Test
 		assertTrue(expected.equals(C.getExternalLinks()));
 		
 	}
-	/*@Test
+	@Test
 	void test_Page_Links()
 	{
 		
@@ -150,11 +150,11 @@ class Sprint1Test
 	@Test
 	void exception_page_links()
 	{
-		HashMap<String, ArrayList<Page>> mock = new HashMap<String,ArrayList<Page>>();
-		ArrayList<Page> vals1 = new ArrayList <Page>();
-		ArrayList<Page> vals2 = new ArrayList <Page>();
-		ArrayList<Page> vals3 = new ArrayList <Page>();
-		ArrayList<Page> vals4 = new ArrayList <Page>();
+		HashMap<String, ArrayList<String>> mock = new HashMap<String,ArrayList<String>>();
+		ArrayList<String> vals1 = new ArrayList <String>();
+		ArrayList<String> vals2 = new ArrayList <String>();
+		ArrayList<String> vals3 = new ArrayList <String>();
+		ArrayList<String> vals4 = new ArrayList <String>();
 	//Case: 1
 		assertThrows(ClassIncompatibleException.class,  
 				() -> {A.addLink("project", NY);}
@@ -187,9 +187,9 @@ class Sprint1Test
 				() -> {Fire.addLink("contributor", SWE);}
 				);
 		
-		vals1.add(A);
-		vals1.add(B);
-		vals1.add(C);
+		vals1.add(A.getId());
+		vals1.add(B.getId());
+		vals1.add(C.getId());
 		mock.put("follower", vals1);
 		try
 		{
@@ -199,7 +199,7 @@ class Sprint1Test
 			D.addLink("follower",C);
 			D.addLink("follower", C);
 			assertEquals(1,D.getPage_links().size());
-			//assertEquals(mock,D.getPage_links());
+			assertEquals(mock,D.getPage_links());
 			D.addLink("employer", Amazon);
 			D.addLink("project", Ice);
 			assertEquals(3,D.getPage_links().size());
@@ -228,7 +228,7 @@ class Sprint1Test
 		
 	
 		assertFalse(D.page_links.containsKey("news_article")); //Checking with a key that does not exist
-	}*/
+	}
 
 	@Test
 	void test_IDGenerator()
@@ -290,7 +290,7 @@ class Sprint1Test
 		assertArrayEquals(SWE.getRolesHas(), roles_has);
 		assertArrayEquals(DA.getRolesIs(), roles_is); 
 	}
-	/*@Test
+	@Test
 	void test_viewPermission()
 	{
 		ArrayList<Page> empty_arr = new ArrayList <Page>();
@@ -302,6 +302,7 @@ class Sprint1Test
 		{
 			e.printStackTrace();
 		}
+		System.out.println(B.getId());
 		assertFalse(A.canView(Amazon));
 		assertTrue(B.canView(Amazon));
 		
@@ -378,7 +379,7 @@ class Sprint1Test
 		assertFalse(Fire.getLink("mentor"));
 		assertTrue(Fire.getLink("editor"));
 		
-	}*/
+	}
 	
 	
 	

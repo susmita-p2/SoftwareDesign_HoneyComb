@@ -16,10 +16,7 @@ public class PageFactory
 		{return PullTypes.pull_job(id_uri);}
 		else if (class_name.equals("Project"))
 		{return PullTypes.pull_project(id_uri);}
-		else
-		{
 		return null;
-		}
 	}
 	
 }

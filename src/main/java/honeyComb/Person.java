@@ -8,6 +8,8 @@ public class Person extends Page
 	String pronoun;
 	String email;
 	String phone;
+	String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
+	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
 	/**
 	 * @return the pronoun
 	 */
@@ -25,19 +27,18 @@ public class Person extends Page
 	/**
 	 * @return the roles_is
 	 */
-	public String[] getRoles_is()
+	/*public String[] getRoles_is()
 	{
 		return roles_is;
 	}
 	/**
 	 * @return the roles_has
 	 */
-	public String[] getRoles_has()
-	{
-		return roles_has;
-	}
-	String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+//	public String[] getRoles_has()
+//	{
+//		return roles_has;
+//	}
+	
 	//String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
 	
 	public Person(String name, String description,  String pronoun, String email, String phone)
@@ -127,7 +128,7 @@ public class Person extends Page
 		}
 		else
 		{
-			if (p.page_links.get("viewer").contains(this))
+			if (p.page_links.get("viewer").contains(this.getId()))
 			{
 				 return true;
 			}
@@ -140,7 +141,7 @@ public class Person extends Page
 	{
 		if(p.page_links.containsKey("editor"))
 		{
-			if(p.page_links.get("editor").contains(this))
+			if(p.page_links.get("editor").contains(this.getId()))
 			{
 				return true;
 			}
