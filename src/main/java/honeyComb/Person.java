@@ -9,7 +9,7 @@ public class Person extends Page
 	String email;
 	String phone;
 	String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
 	/**
 	 * @return the pronoun
 	 */

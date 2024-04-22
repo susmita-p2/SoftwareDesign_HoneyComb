@@ -8,8 +8,6 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.client.RestClientException;
-
 import honeyComb.RestStorage.RResponseDesc;
 
 class RestTest
@@ -51,8 +49,8 @@ class RestTest
 		Java = new Skill("Java", "Another Programming language");
 		Ice = new Project("Ice","Hot project!");
 		Fire = new Project("Fire", "Cool project with tons of stuff");
-		SWE = new JobPosting("SWE", "Can build stuff!");
-		DA = new JobPosting("DA", "Work with data!");
+		SWE = new JobPosting("SWE", "Can build stuff!", null);
+		DA = new JobPosting("DA", "Work with data!", null);
 		NY = new NewsArticle("AI Boom", "Billionth Article about AI");
 		WA = new NewsArticle("Global Warming", "We're all dying");
 	
@@ -160,10 +158,9 @@ class RestTest
 		RestStorage.update_request(A);
 		
 		String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-		String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+		String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
 		assertArrayEquals(roles_is, ((Person)x).getRolesIs());
 		assertArrayEquals(roles_has, ((Person)x).getRolesHas());	
-	
 		Object x2 = RestStorage.pull_request(A.getId());
 		Page x3 = RestStorage.pull_request("55555");
 		assertEquals(null,x3);
@@ -205,7 +202,7 @@ class RestTest
 		RestStorage.push_request(Meta);
 		RestStorage.push_request(Amazon);
 		RestStorage.push_request(Amazon);
-		String[] roles_is = { "contributor", "employer"};
+		String[] roles_is = { "contributor", "employer", "following"};
 		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
 		Object x = RestStorage.pull_request(Meta.getId());
 		assertEquals("Meta", ((Company) x).getName());
@@ -270,7 +267,7 @@ class RestTest
 	void test_JobPosting()
 	{
 		String[] roles_is = { "job_posting"};
-		String[] roles_has =  { "editor","applicant", "skill", "mentor", "viewer", "contributor"};
+		String[] roles_has =  { "employer","editor","applicant", "skill", "mentor", "viewer", "contributor"};
 		RestStorage.push_request(SWE);
 		RestStorage.push_request(DA);
 		Object x = RestStorage.pull_request(SWE.getId());

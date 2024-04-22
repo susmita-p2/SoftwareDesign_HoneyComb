@@ -41,8 +41,8 @@ class Sprint1Test
 		Java = new Skill("Java", "Another Programming language");
 		Ice = new Project("Ice","Hot project!");
 		Fire = new Project("Fire", "Cool project with tons of stuff");
-		SWE = new JobPosting("SWE", "Can build stuff!");
-		DA = new JobPosting("DA", "Work with data!");
+		SWE = new JobPosting("SWE", "Can build stuff!", null);
+		DA = new JobPosting("DA", "Work with data!", null);
 		NY = new NewsArticle("AI Boom", "Billionth Article about AI");
 		WA = new NewsArticle("Global Warming", "We're all dying");
 	}
@@ -60,7 +60,7 @@ class Sprint1Test
 		assertEquals("859-691-9812", C.getPhone());
 		
 		String[] person_is= {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-		String[] person_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting"};
+		String[] person_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
 		System.out.println(A.getRolesIs());
 		assertArrayEquals(person_is,A.getRolesIs());
 		assertArrayEquals(person_has,A.getRolesHas());
@@ -252,7 +252,7 @@ class Sprint1Test
 	{
 		assertEquals("Amazon", Amazon.getName());
 		assertEquals("Stuff with social media", Meta.getDescription());
-		String[] roles_is = { "contributor", "employer"};
+		String[] roles_is = { "contributor", "employer", "following"};
 		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
 		assertArrayEquals(Amazon.getRolesHas(), roles_has);
 		assertArrayEquals(Meta.getRolesIs(), roles_is);
@@ -286,7 +286,7 @@ class Sprint1Test
 	void test_JobPosting()
 	{
 		String[] roles_is = { "job_posting"};
-		String[] roles_has =  { "editor","applicant", "skill", "mentor", "viewer", "contributor"};
+		String[] roles_has =  {"employer", "editor","applicant", "skill", "mentor", "viewer", "contributor"};
 		assertArrayEquals(SWE.getRolesHas(), roles_has);
 		assertArrayEquals(DA.getRolesIs(), roles_is); 
 	}

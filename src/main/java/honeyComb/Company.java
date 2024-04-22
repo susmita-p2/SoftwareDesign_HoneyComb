@@ -2,7 +2,7 @@ package honeyComb;
 
 public class Company extends Page
 {
-	static String[] roles_is = { "contributor", "employer"};
+	static String[] roles_is = { "contributor", "employer", "following"};
 	static String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
 	
 	public Company( String name, String description )
