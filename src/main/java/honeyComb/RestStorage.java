@@ -169,7 +169,7 @@ public class RestStorage
 		{
 			Person x = (Person) pull_request(arr_id.get(j));
 			//System.out.println(x);
-			person_arr.add((Person)x);
+			person_arr.add(x);
 			j++;
 		}
 		
@@ -199,9 +199,9 @@ public class RestStorage
 		int j = 0;
 		while (j < (arr_id.size()))
 		{
-			Page x = pull_request(arr_id.get(j));
+			Company x = (Company) pull_request(arr_id.get(j));
 			//System.out.println(x);
-			company_arr.add((Company)x);
+			company_arr.add(x);
 			j++;
 		}
 		
@@ -230,9 +230,9 @@ public class RestStorage
 			int j = 0;
 			while (j < (arr_id.size()))
 			{
-				Page x = pull_request(arr_id.get(j));
+				Skill x = (Skill) pull_request(arr_id.get(j));
 				//System.out.println(x);
-				skill_arr.add((Skill)x);
+				skill_arr.add(x);
 				j++;
 			}
 			
@@ -261,9 +261,9 @@ public class RestStorage
 			int j = 0;
 			while (j < (arr_id.size()))
 			{
-				Page x = pull_request(arr_id.get(j));
+				Project x = (Project) pull_request(arr_id.get(j));
 				//System.out.println(x);
-				project_arr.add((Project)x);
+				project_arr.add(x);
 				j++;
 			}
 			
@@ -292,9 +292,9 @@ public class RestStorage
 			int j = 0;
 			while (j < (arr_id.size()))
 			{
-				Page x = pull_request(arr_id.get(j));
+				NewsArticle x = (NewsArticle) pull_request(arr_id.get(j));
 				//System.out.println(x);
-				news_arr.add((NewsArticle)x);
+				news_arr.add(x);
 				j++;
 			}
 			
@@ -323,9 +323,9 @@ public class RestStorage
 					int j = 0;
 					while (j < (arr_id.size()))
 					{
-						Page x = pull_request(arr_id.get(j));
+						JobPosting x = (JobPosting) pull_request(arr_id.get(j));
 						//System.out.println(x);
-						job_arr.add((JobPosting)x);
+						job_arr.add(x);
 						j++;
 					}
 					
