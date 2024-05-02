@@ -1,14 +1,12 @@
 package honeyComb;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 
 import org.springframework.web.client.RestClient;
 import org.springframework.web.client.RestClientException;
 
-import honeyComb.RestStorage.PageResponse;
 
-//import honeyComb.RestStorage.PersonResponse;
 
 public class RestStorage
 {
@@ -19,20 +17,16 @@ public class RestStorage
 	public record RResponseDesc(String request, String successful, String message, RDesc data) {};
 	public record Update(String request, String successful, String message, String data) {};
 	public record PageResponse(String request, String successful, String message, RDesc[] data) {};
-	/*public record CompanyResponse(String request, String successful, String message,  Company data) {};
-	public record SkillResponse(String request, String successful, String message,  Skill data) {};
-	public record JobPostingResponse(String request, String successful, String message,  JobPosting data) {};
-	public record ProjectResponse(String request, String successful, String message,  Project data) {};
-	public record NewsArticleResponse(String request, String successful, String message,  NewsArticle data) {};*/
+
 	
 	
 	
 	public static  RResponseDesc createProductShell()
 	{
-		String delete_team = defaultClient.delete()
+		defaultClient.delete()
 				.uri(uribase)
-				.retrieve()
-				.body(String.class);
+				.retrieve();
+				
 		RResponseDesc result = defaultClient.post() 
 			  .uri(uribase)
 			  .body(new RDesc("HoneyComb", "Networking platform",""))
@@ -90,7 +84,7 @@ public class RestStorage
 	{
 	
 		String check_result = check_request(id);
-		System.out.println(check_result);
+		//System.out.println(check_result);
 		/*if (check_result.equals(""))
 		{
 			return null;
@@ -108,17 +102,18 @@ public class RestStorage
 		for(int i = 0; i < page_classes.length; i++)
 		{
 			String test_uri = uribase + "/" + page_classes[i] + "/" + id;
-			//System.out.println(test_uri);
+		
 		
 			try
 			{
-				RResponseDesc  id_exists= defaultClient.get()
+				/*RResponseDesc  id_exists=*/ defaultClient.get()
 						.uri(test_uri)
 						.retrieve()
 						.body(RResponseDesc.class);
-				//System.out.println(id_exists);	
-				//System.out.println(page_classes[i]);
-				return page_classes[i];
+				
+					return page_classes[i];
+				
+				
 			} catch (RestClientException ex)
 			{
 					System.out.println( test_uri + "Not exist");
@@ -149,6 +144,205 @@ public class RestStorage
 		}
 		return arr_id;	
 	}
+	//Pull all Person entities
+	public static ArrayList<Page> pull_Person()
+	{
+		ArrayList<Page> person_arr = new ArrayList<Page>();
+		ArrayList<String> arr_id = new ArrayList<String>();
+		String id_uri =  uribase+ "/" + "Person";
+		PageResponse  page_exists= defaultClient.get()
+				.uri(id_uri)
+				.retrieve()
+				.body(PageResponse.class);
+		System.out.println(page_exists.data);
+		RDesc[] data_arr = page_exists.data;
+		System.out.println(data_arr.length);
+		int i = 0;
+		while (i <(data_arr.length))
+		{
+			System.out.println(data_arr[i].name() + ","+ i);
+			arr_id.add(data_arr[i].name());
+			i++;
+		}
+		int j = 0;
+		while (j < (arr_id.size()))
+		{
+			Person x = (Person) pull_request(arr_id.get(j));
+			//System.out.println(x);
+			person_arr.add((Person)x);
+			j++;
+		}
+		
+		return person_arr;
+	}
+	
+	//Pull all company entities
+	public static ArrayList<Page> pull_Company()
+	{
+		ArrayList<Page> company_arr = new ArrayList<Page>();
+		ArrayList<String> arr_id = new ArrayList<String>();
+		String id_uri =  uribase+ "/" + "Company";
+		PageResponse  page_exists= defaultClient.get()
+				.uri(id_uri)
+				.retrieve()
+				.body(PageResponse.class);
+		System.out.println(page_exists.data);
+		RDesc[] data_arr = page_exists.data;
+		System.out.println(data_arr.length);
+		int i = 0;
+		while (i <(data_arr.length))
+		{
+			System.out.println(data_arr[i].name() + ","+ i);
+			arr_id.add(data_arr[i].name());
+			i++;
+		}
+		int j = 0;
+		while (j < (arr_id.size()))
+		{
+			Page x = pull_request(arr_id.get(j));
+			//System.out.println(x);
+			company_arr.add((Company)x);
+			j++;
+		}
+		
+		return company_arr;
+	}
+	//Pull all skill entities
+		public static ArrayList<Page> pull_Skill()
+		{
+			ArrayList<Page> skill_arr = new ArrayList<Page>();
+			ArrayList<String> arr_id = new ArrayList<String>();
+			String id_uri =  uribase+ "/" + "Skill";
+			PageResponse  page_exists= defaultClient.get()
+					.uri(id_uri)
+					.retrieve()
+					.body(PageResponse.class);
+			System.out.println(page_exists.data);
+			RDesc[] data_arr = page_exists.data;
+			System.out.println(data_arr.length);
+			int i = 0;
+			while (i <(data_arr.length))
+			{
+				System.out.println(data_arr[i].name() + ","+ i);
+				arr_id.add(data_arr[i].name());
+				i++;
+			}
+			int j = 0;
+			while (j < (arr_id.size()))
+			{
+				Page x = pull_request(arr_id.get(j));
+				//System.out.println(x);
+				skill_arr.add((Skill)x);
+				j++;
+			}
+			
+			return skill_arr;
+		}
+		//Pull all project entities
+		public static ArrayList<Page> pull_Project()
+		{
+			ArrayList<Page> project_arr = new ArrayList<Page>();
+			ArrayList<String> arr_id = new ArrayList<String>();
+			String id_uri =  uribase+ "/" + "Project";
+			PageResponse  page_exists= defaultClient.get()
+					.uri(id_uri)
+					.retrieve()
+					.body(PageResponse.class);
+			System.out.println(page_exists.data);
+			RDesc[] data_arr = page_exists.data;
+			System.out.println(data_arr.length);
+			int i = 0;
+			while (i <(data_arr.length))
+			{
+				System.out.println(data_arr[i].name() + ","+ i);
+				arr_id.add(data_arr[i].name());
+				i++;
+			}
+			int j = 0;
+			while (j < (arr_id.size()))
+			{
+				Page x = pull_request(arr_id.get(j));
+				//System.out.println(x);
+				project_arr.add((Project)x);
+				j++;
+			}
+			
+			return project_arr;
+		}
+		//Pull all newsarticle entities
+		public static ArrayList<Page> pull_NewsArticle()
+		{
+			ArrayList<Page> news_arr = new ArrayList<Page>();
+			ArrayList<String> arr_id = new ArrayList<String>();
+			String id_uri =  uribase+ "/" + "NewsArticle";
+			PageResponse  page_exists= defaultClient.get()
+					.uri(id_uri)
+					.retrieve()
+					.body(PageResponse.class);
+			System.out.println(page_exists.data);
+			RDesc[] data_arr = page_exists.data;
+			System.out.println(data_arr.length);
+			int i = 0;
+			while (i <(data_arr.length))
+			{
+				System.out.println(data_arr[i].name() + ","+ i);
+				arr_id.add(data_arr[i].name());
+				i++;
+			}
+			int j = 0;
+			while (j < (arr_id.size()))
+			{
+				Page x = pull_request(arr_id.get(j));
+				//System.out.println(x);
+				news_arr.add((NewsArticle)x);
+				j++;
+			}
+			
+			return news_arr;
+		}
+		//Pull all jobposting entities
+				public static ArrayList<Page> pull_JobPosting()
+				{
+					ArrayList<Page> job_arr = new ArrayList<Page>();
+					ArrayList<String> arr_id = new ArrayList<String>();
+					String id_uri =  uribase+ "/" + "JobPosting";
+					PageResponse  page_exists= defaultClient.get()
+							.uri(id_uri)
+							.retrieve()
+							.body(PageResponse.class);
+					System.out.println(page_exists.data);
+					RDesc[] data_arr = page_exists.data;
+					System.out.println(data_arr.length);
+					int i = 0;
+					while (i <(data_arr.length))
+					{
+						System.out.println(data_arr[i].name() + ","+ i);
+						arr_id.add(data_arr[i].name());
+						i++;
+					}
+					int j = 0;
+					while (j < (arr_id.size()))
+					{
+						Page x = pull_request(arr_id.get(j));
+						//System.out.println(x);
+						job_arr.add((JobPosting)x);
+						j++;
+					}
+					
+					return job_arr;
+				}
+	//Pull all entities based on ids
+				public static ArrayList<Page> pull_entities(ArrayList<String> arr)
+				{
+					ArrayList<Page> entity_arr = new ArrayList<Page>();
+					
+					for (int i = 0; i < arr.size(); i++)
+					{
+						Page x = pull_request(arr.get(i));
+						entity_arr.add(x);
+					}
+					return entity_arr;
+				}
 
 
 }
