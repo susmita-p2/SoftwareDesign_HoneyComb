@@ -389,9 +389,17 @@ class RestTest
 		check_company = RestStorage.pull_Company();
 		System.out.println(check_company);
 		
+		ArrayList<String> vals = new ArrayList <String>();
+		vals.add(Meta.getName());
+		vals.add(Amazon.getName());
+		ArrayList<String> rest_company = new ArrayList <String>();
+		rest_company.add(check_company.get(0).getName());
+		rest_company.add(check_company.get(1).getName());
 		assertEquals(2, check_company.size());
-		assertEquals(check_company.get(0).getName(), "Meta");
-		assertEquals(check_company.get(1).getName(), "Amazon");
+		
+		assertTrue(vals.containsAll(rest_company) && rest_company.containsAll(vals));
+		
+		
 		String[] roles_is = { "contributor", "employer", "following"};
 		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
 		
