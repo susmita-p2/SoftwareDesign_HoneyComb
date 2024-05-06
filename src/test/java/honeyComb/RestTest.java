@@ -8,7 +8,17 @@ import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import honeyComb.RestStorage.RResponseDesc;
+
+import model.ClassIncompatibleException;
+import model.Company;
+import model.JobPosting;
+import model.NewsArticle;
+import model.Page;
+import model.Person;
+import model.Project;
+import model.RestStorage;
+import model.Skill;
+import model.RestStorage.RResponseDesc;
 
 class RestTest
 {
@@ -51,8 +61,8 @@ class RestTest
 		Fire = new Project("Fire", "Cool project with tons of stuff");
 		SWE = new JobPosting("SWE", "Can build stuff!", null);
 		DA = new JobPosting("DA", "Work with data!", null);
-		NY = new NewsArticle("AI Boom", "Billionth Article about AI");
-		WA = new NewsArticle("Global Warming", "We're all dying");
+		NY = new NewsArticle("NY", "Billionth Article about AI");
+		WA = new NewsArticle("WA", "We're all dying");
 	
 		result = RestStorage.createProductShell();
 		Person = RestStorage.create_Pages("Person");
@@ -274,11 +284,242 @@ class RestTest
 		assertArrayEquals(((JobPosting)x).getRolesHas(), roles_has);
 		assertArrayEquals(((JobPosting)x).getRolesIs(), roles_is);
 	}
+	@Test
+	void test_pull_Person()
+	{
+		try {
+			A.addLink("follower", B);
+		} catch (ClassIncompatibleException e) {
+		
+			e.printStackTrace();
+		}
+		RestStorage.push_request(A);
+		RestStorage.push_request(B);
+		RestStorage.push_request(C);
+		ArrayList<Page> check_person = new ArrayList<Page>();
+		check_person = RestStorage.pull_Person();
+		System.out.println(check_person);
+		
+		ArrayList<String> mock_names = new ArrayList<String>();
+		mock_names.add("Alice");
+		mock_names.add("Helen");
+		mock_names.add("Bob");
+		
+		ArrayList <String> rest_names = new ArrayList<String>();
+		rest_names.add(check_person.get(0).getName());
+		rest_names.add(check_person.get(1).getName());
+		rest_names.add(check_person.get(2).getName());
+		System.out.println(rest_names);
+		assertTrue(mock_names.containsAll(rest_names) && rest_names.containsAll(mock_names));
+		assertEquals(3, check_person.size());
+		
+		
+		
+		ArrayList <String> mock_ids = new ArrayList<String>();
+		mock_ids.add(A.getId());
+		mock_ids.add(B.getId());
+		mock_ids.add(C.getId());
+		
+		ArrayList <String> rest_ids = new ArrayList<String>();
+		rest_ids.add(((Person)check_person.get(0)).getId());
+		rest_ids.add(((Person)check_person.get(1)).getId());
+		rest_ids.add(((Person)check_person.get(2)).getId());
+		assertTrue(mock_ids.containsAll(rest_ids) && rest_ids.containsAll(mock_ids));
 	
-
+		
+		ArrayList <String> mock_pronouns = new ArrayList <String>();
+		mock_pronouns.add(A.getPronoun());
+		mock_pronouns.add(B.getPronoun());
+		mock_pronouns.add(C.getPronoun());
+		
+		ArrayList <String> rest_pronouns = new ArrayList <String>();
+		rest_pronouns.add(((Person) check_person.get(0)).getPronoun());
+		rest_pronouns.add(((Person) check_person.get(1)).getPronoun());
+		rest_pronouns.add(((Person) check_person.get(2)).getPronoun());
+		
+		assertTrue(mock_pronouns.containsAll(rest_pronouns) && rest_pronouns.containsAll(mock_pronouns));
+		
+		ArrayList <String> mock_email = new ArrayList <String>();
+		mock_email.add(A.getEmail());
+		mock_email.add(B.getEmail());
+		mock_email.add(C.getEmail());
+		
+		ArrayList <String> rest_email = new ArrayList <String>();
+		rest_email.add(((Person) check_person.get(0)).getEmail());
+		rest_email.add(((Person) check_person.get(1)).getEmail());
+		rest_email.add(((Person) check_person.get(2)).getEmail());
 	
+		assertTrue(mock_email.containsAll(rest_email) && rest_email.containsAll(mock_email));
+		
+		ArrayList <String> mock_description = new ArrayList <String>();
+		mock_description.add(A.getDescription());
+		mock_description.add(B.getDescription());
+		mock_description.add(C.getDescription());
+		
+		
+		
+		ArrayList <String> rest_description = new ArrayList <String>();
+		rest_description.add(((Person) check_person.get(0)).getDescription());
+		rest_description.add(((Person) check_person.get(1)).getDescription());
+		rest_description.add(((Person) check_person.get(2)).getDescription());
+		
+		
+		assertTrue(mock_description.containsAll(rest_description) && rest_description.containsAll(mock_description));
+	
+		Page a = check_person.get(0);
+		System.out.println(a.getName());
+		
+		assertTrue(((Person) check_person.get(0)).getPage_links().containsKey("follower"));
+		assertFalse(((Person) check_person.get(2)).getPage_links().containsKey("employer"));
+		assertFalse(((Person) check_person.get(1)).getPage_links().containsKey("follower"));
+		ArrayList<String> vals = new ArrayList <String>();
+		vals.add(B.getId());
+		assertEquals(((Person) check_person.get(0)).getPage_links().get("follower"),vals);
+		
+		
+		String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
+		String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
+		
+		assertArrayEquals(((Person) check_person.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((Person) check_person.get(1)).getRolesHas(), roles_has);
+		assertArrayEquals(((Person) check_person.get(2)).getRolesHas(), roles_has);
+		
+		assertArrayEquals(((Person) check_person.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((Person) check_person.get(1)).getRolesIs(), roles_is);
+		assertArrayEquals(((Person) check_person.get(2)).getRolesIs(), roles_is);	
+	}
+	@Test
+	void Test_pull_Company()
+	{
+		RestStorage.push_request(Meta);
+		RestStorage.push_request(Amazon);
+		ArrayList<Page> check_company = new ArrayList<Page>();
+		check_company = RestStorage.pull_Company();
+		System.out.println(check_company);
+		
+		ArrayList<String> vals = new ArrayList <String>();
+		vals.add(Meta.getName());
+		vals.add(Amazon.getName());
+		ArrayList<String> rest_company = new ArrayList <String>();
+		rest_company.add(check_company.get(0).getName());
+		rest_company.add(check_company.get(1).getName());
+		assertEquals(2, check_company.size());
+		
+		assertTrue(vals.containsAll(rest_company) && rest_company.containsAll(vals));
+		
+		
+		String[] roles_is = { "contributor", "employer", "following"};
+		String[] roles_has = { "employee", "project", "job_posting", "follower", "news_article", "viewer", "mentor", "editor"};
+		
+		assertArrayEquals(((Company) check_company.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((Company) check_company.get(1)).getRolesHas(), roles_has);	
 
+		assertArrayEquals(((Company) check_company.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((Company) check_company.get(1)).getRolesIs(), roles_is);
+	}
+	@Test
+	void Test_pull_Skill()
+	{
+		String[] roles_is = { "skill"};
+		String[] roles_has =  { "editor","following", "mentor", "viewer"};
+		RestStorage.push_request(Python);
+		ArrayList<Page> check_skill = new ArrayList<Page>();
+		check_skill = RestStorage.pull_Skill();
+		assertEquals(1, check_skill.size());
+		RestStorage.push_request(Java);
+		check_skill = RestStorage.pull_Skill();
+		assertEquals(2, check_skill.size());
+		assertArrayEquals(((Skill) check_skill.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((Skill) check_skill.get(1)).getRolesHas(), roles_has);	
 
+		assertArrayEquals(((Skill) check_skill.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((Skill) check_skill.get(1)).getRolesIs(), roles_is);
+		
+	}
+	@Test
+	void Test_pull_Project()
+	{
+	
+		String[] roles_is = {"project"};
+		String[] roles_has =  { "editor","contributor", "follower", "mentor", "viewer"};
+		RestStorage.push_request(Fire);
+		ArrayList<Page> check_project = new ArrayList<Page>();
+		check_project = RestStorage.pull_Project();
+		assertEquals(1, check_project.size());
+		RestStorage.push_request(Ice);
+		check_project = RestStorage.pull_Project();
+		assertEquals(2, check_project.size());
+		assertArrayEquals(((Project) check_project.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((Project) check_project.get(1)).getRolesHas(), roles_has);	
 
+		assertArrayEquals(((Project) check_project.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((Project) check_project.get(1)).getRolesIs(), roles_is);	
+	}
+	
+	@Test
+	void Test_pull_NewsArticle()
+	{
+		String[] roles_is = {"news_article"};
+		String[] roles_has = { "editor","contributor","mentor","viewer"};
+		
+		
+		ArrayList<Page> check_news = new ArrayList<Page>();
+		assertEquals(0, check_news.size());
+		RestStorage.push_request(NY);
+		check_news = RestStorage.pull_NewsArticle();
+		assertEquals(1, check_news.size());
+		RestStorage.push_request(WA);
+		check_news = RestStorage.pull_NewsArticle();
+		assertEquals(2, check_news.size());
+		assertArrayEquals(((NewsArticle) check_news.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((NewsArticle) check_news.get(1)).getRolesHas(), roles_has);	
+
+		assertArrayEquals(((NewsArticle) check_news.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((NewsArticle) check_news.get(1)).getRolesIs(), roles_is);	
+	}
+	@Test
+	void Test_pull_JobPosting()
+	{
+		String[] roles_is = { "job_posting"};
+		String[] roles_has = { "employer","editor","applicant", "skill", "mentor", "viewer", "contributor"};
+		
+		
+		ArrayList<Page> check_jobs = new ArrayList<Page>();
+		assertEquals(0, check_jobs.size());
+		RestStorage.push_request(SWE);
+		check_jobs = RestStorage.pull_JobPosting();
+		assertEquals(1, check_jobs.size());
+		RestStorage.push_request(DA);
+		check_jobs = RestStorage.pull_JobPosting();
+		assertEquals(2, check_jobs.size());
+		assertArrayEquals(((JobPosting) check_jobs.get(0)).getRolesHas(), roles_has);
+		assertArrayEquals(((JobPosting) check_jobs.get(1)).getRolesHas(), roles_has);	
+
+		assertArrayEquals(((JobPosting) check_jobs.get(0)).getRolesIs(), roles_is);
+		assertArrayEquals(((JobPosting) check_jobs.get(1)).getRolesIs(), roles_is);	
+	}
+	
+	@Test
+	void test_pull_entities()
+	{
+		RestStorage.push_request(A);
+		RestStorage.push_request(NY);
+		RestStorage.push_request(Python);
+		
+		ArrayList<Page> arr = new ArrayList<Page>();
+		ArrayList<String> check_ids = new ArrayList<String>();
+		check_ids.add(A.getId());
+		check_ids.add(NY.getId());
+		check_ids.add(Python.getId());
+		check_ids.add(B.getId());
+		arr = RestStorage.pull_entities(check_ids);
+		
+		assertEquals(arr.size(),4);
+		assertEquals(arr.get(0).getName(),A.getName());
+		assertEquals(arr.get(1).getName(),NY.getName());
+		assertEquals(arr.get(2).getName(),Python.getName());
+		assertEquals(arr.get(3),null);
+	}
+	
 
 }

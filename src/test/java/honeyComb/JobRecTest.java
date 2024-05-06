@@ -7,6 +7,16 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.AllRecommender;
+import model.Company;
+import model.FollowingRecommender;
+import model.JobPosting;
+import model.Page;
+import model.Person;
+import model.RestStorage;
+import model.Skill;
+import model.SkillRecommender;
+
 class JobRecTest
 {
 	Person A;

@@ -8,6 +8,16 @@ import java.util.HashMap;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import model.ClassIncompatibleException;
+import model.Company;
+import model.IDGenerator;
+import model.JobPosting;
+import model.NewsArticle;
+import model.Page;
+import model.Person;
+import model.Project;
+import model.Skill;
+
 class Sprint1Test
 {
 
