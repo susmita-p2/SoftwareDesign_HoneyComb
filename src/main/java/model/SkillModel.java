@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.layout.BorderPane;
+
 public class SkillModel extends PageModel
 {
 
@@ -7,6 +9,13 @@ public class SkillModel extends PageModel
 	{
 		super(p);
 		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public PageTransitionModel create_transition(BorderPane view)
+	{
+		
+		return new SkillTransitionModel(view, this);
 	}
 
 }

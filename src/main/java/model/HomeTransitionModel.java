@@ -11,9 +11,9 @@ import views.LoginPageController;
 
 public class HomeTransitionModel {
 	BorderPane mainview;
-	PersonModel model;
+	PageModel model;
 	
-	public HomeTransitionModel(BorderPane view, PersonModel newModel) {
+	public HomeTransitionModel(BorderPane view, PageModel newModel) {
 		mainview = view;
 		model = newModel;
 	}

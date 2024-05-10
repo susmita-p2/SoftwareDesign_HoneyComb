@@ -351,21 +351,21 @@ public class RestStorage
 				public static ObservableList<PageModel> create_models(String curr_id, String role)
 				{
 					Page x = RestStorage.pull_request(curr_id);
-					PageModel model = x.makeModel();
-			    	System.out.println(model.getPage_links());
+					//System.out.println(x);
+					//PageModel model = x.makeModel();
+			    	//System.out.println(x.getPage_links());
 			    	ObservableList<PageModel> role_list = FXCollections.observableArrayList();
 			    	HashMap<String, ArrayList<String>> curr_links = x.getPage_links();
+			    	System.out.println(x.getPage_links());
 					ArrayList<String> arr = curr_links.get(role);
-					model.getPage_links().get(role).setAll(arr);
-					System.out.println(model.getPage_links());
-			    
-			    	System.out.println(role_list);
+					;
 			    	for (int i = 0; i < arr.size(); i++)
 			    	{
 			    		Page a = RestStorage.pull_request(arr.get(i));
+			    		System.out.println(a.getName());
 			    		PageModel pg = a.makeModel();
 			    		role_list.add(pg);
-			    		System.out.println(pg);
+			    		//System.out.println(pg);
 			    		
 			    	}
 			    	return role_list;

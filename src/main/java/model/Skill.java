@@ -3,8 +3,8 @@ package model;
 
 public class Skill extends Page
 {
-	static String[] roles_is = { "skill"};
-	static String[] roles_has = { "editor","following", "mentor", "viewer"};
+	static String[] roles_is = { "skill", "following"};
+	static String[] roles_has = { "editor","following", "mentor", "viewer", "follower"};
 	public Skill(String name, String description)
 	{
 		super(name, description);

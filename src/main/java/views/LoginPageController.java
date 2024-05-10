@@ -28,7 +28,7 @@ public class LoginPageController {
 
 	public void setUsername(String username)
 	{
-		this.username = username;
+		LoginPageController.username = username;
 	}
 
 	@FXML
@@ -55,7 +55,7 @@ public class LoginPageController {
     		{
     			System.out.println("HELP");
     		}
-    		System.out.println("Calling home!");
+    		//System.out.println("Calling home!");
     		this.loginNavModel.showHomepage(username);
     	}
     	else

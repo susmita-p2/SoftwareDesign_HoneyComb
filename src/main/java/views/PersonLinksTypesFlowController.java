@@ -1,155 +1,305 @@
 package views;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
+import javafx.util.Callback;
 import model.AllLinksModel;
-import model.AllPagesModel;
-import model.LoginNavigationModel;
 import model.Page;
 import model.PageModel;
-import model.Person;
 import model.PersonModel;
 import model.RestStorage;
 
 public class PersonLinksTypesFlowController {
 	PersonModel model; // this will be the page we're looking at
 	AllLinksModel allLinksModel;
-
-	public void setModel(PersonModel newmodel, AllLinksModel allLinks)
+	BorderPane mainview;
+	String curr_id;
+	public void setModel(PageModel newmodel, AllLinksModel allLinks,BorderPane mainview)
 	{
-		model = newmodel;
+		model = (PersonModel)newmodel;
 		this.allLinksModel = allLinks;
-	    //String a = LoginPageController.getUsername();
-		//Person x = (Person) RestStorage.pull_request(a);
-		//model = new PersonModel(x);
-		//HashMap<String, ArrayList<String>> curr_links = x.getPage_links();
-		//System.out.println(curr_links);
-		//allLinksListView.setItems(FXCollections.observableArrayList());
+		this.mainview = mainview;
+		Page curr = model.getPage();
+		curr_id = curr.getId();
+		System.out.println("Current id:" + curr_id);
 	}
 
     @FXML
     private ListView<PageModel> allLinksListView;
 
     @FXML
-    private Button companyPageTypeBtn;
+    private Button editorButton;
 
     @FXML
-    private Button jobPostingPageTypeBtn;
+    private Button employerButton;
 
     @FXML
-    private Button newsArticlePageTypeBtn;
+    private Button followerButton;
 
     @FXML
-    private Button personPageTypeBtn;
+    private Button followingButton;
 
     @FXML
-    private Button personPageTypeBtn1;
+    private Button friendButton;
 
     @FXML
-    private Button personPageTypeBtn2;
+    private Button jobPostingButton;
 
     @FXML
-    private Button personPageTypeBtn3;
+    private Button mentorButton;
 
     @FXML
-    private Button projectPageTypeBtn;
+    private Button newsArticleButton;
 
     @FXML
-    private Button skillPageTypeBtn;
+    private Button projectButton;
+
+    @FXML
+    private Button skillButton;
+
+    @FXML
+    private Button viewerButton;
     
     //String id = model.getId().toString();
     String a = LoginPageController.getUsername();
-	//Person x = (Person) RestStorage.pull_request(a);
-	//model = new PersonModel(x);
-	//HashMap<String, ArrayList<String>> curr_links = x.getPage_links();
+
+    
+
 	
 	
 	
     @FXML
     void onEmployerButtonClick(ActionEvent event) {
-    	/*System.out.println(a);
-    	model = new PersonModel(x);
-    	System.out.println(model.getPage_links());
-    	ObservableList<PageModel> employers = FXCollections.observableArrayList();
-		ArrayList<String> arr = curr_links.get("employer");
-		model.getPage_links().get("employer").setAll(arr);
-		System.out.println(model.getPage_links());
-    
-    	System.out.println(employers);
-    	for (int i = 0; i < arr.size(); i++)
-    	{
-    		Page a = RestStorage.pull_request(arr.get(i));
-    		PageModel pg = a.makeModel();
-    		employers.add(pg);
-    		System.out.println(pg);
-    		
-    	}
-    //	System.out.println(a.getName());
-    	//employers.add(a.getName());*/
     	
-    	allLinksListView.setItems(RestStorage.create_models(a, "employer"));
+    	
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+  	
+    	if (RestStorage.create_models(curr_id, "employer") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "employer"));
+    	}
 
 
     }
 
     @FXML
     void onFollowerButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "follower"));
+    	
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+    	
+    	if (RestStorage.create_models(curr_id, "follower") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "follower"));
+    	}
+    	
 
     }
 
     @FXML
     void onFollowingButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "following"));
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
 
-    }
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+  	
+    	if (RestStorage.create_models(curr_id, "following") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "following"));
+    	}
+    		
+
+    	}
 
     @FXML
     void onFriendButtonClick(ActionEvent event) {
     	
-    	allLinksListView.setItems(RestStorage.create_models(a, "friend"));
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "friend") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "friend"));
+    	}
 
     }
 
     @FXML
     void onMentorButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "mentor"));
+    	
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "mentor") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "mentor"));
+    	}
 
     }
 
     @FXML
     void onNewsArticleButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "news_article"));
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "news_article") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "news_article"));
+    	}
 
     }
 
     @FXML
     void onProjectButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "project"));
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+  	//Page page = RestStorage.pull_request(curr_id);
+	
+  	if (RestStorage.create_models(curr_id, "project") != null)
+  	{
+  		allLinksListView.setItems(RestStorage.create_models(curr_id, "project"));
+  	}
 
     }
 
     @FXML
     void onViewerButtonClick(ActionEvent event) {
-    	allLinksListView.setItems(RestStorage.create_models(a, "viewer"));
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "viewer") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "viewer"));
+    	}
 
     }
     
-    //TODO delete this, for demo only
+  
+
     @FXML
-    void onClickAmazon(ActionEvent event)
-    {
-    	//this.allLinksModel.showAmazon();
+    void onSkillButtonClick(ActionEvent event) {
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "skill") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "skill"));
+    	}
+
     }
+    @FXML
+    void onJobPostingButtonClick(ActionEvent event) {
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+    	//Page page = RestStorage.pull_request(curr_id);
+	
+    	if (RestStorage.create_models(curr_id, "job_posting") != null)
+    	{
+    		allLinksListView.setItems(RestStorage.create_models(curr_id, "job_posting"));
+    	}
+
+    }
+    
+    @FXML
+    void onEditorButtonClick(ActionEvent event) {
+    	allLinksListView.setCellFactory(new Callback<ListView<PageModel>, ListCell<PageModel>>()
+		  {
+
+			@Override
+			public ListCell<PageModel> call(ListView<PageModel> lv)
+			{
+				return new ItemListCell(lv, new ItemCellController(),mainview);
+			}
+		  });
+  	//Page page = RestStorage.pull_request(curr_id);
+	
+  	if (RestStorage.create_models(curr_id, "editor") != null)
+  	{
+  		allLinksListView.setItems(RestStorage.create_models(curr_id, "editor"));
+  	}
+
+    }
+
     
 
 }

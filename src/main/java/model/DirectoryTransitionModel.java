@@ -7,17 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
 import views.AllPageTypesFlowController;
-import views.DirectoryController;
-import views.PersonCanEditController;
 import views.PersonLinksTypesFlowController;
 
 
 public class DirectoryTransitionModel 
 {
 	BorderPane mainview;
-	PersonModel model;
-	public DirectoryTransitionModel(BorderPane view, PersonModel newModel) {
-		model = newModel;
+	PageModel model;
+	public DirectoryTransitionModel(BorderPane view, PageModel model) {
+		this.model = model;
 		mainview = view;
 	}
 	
@@ -45,7 +43,8 @@ public class DirectoryTransitionModel
 			      Node view = loader.load();
 			      mainview.setCenter(view);
 			      PersonLinksTypesFlowController cont = loader.getController();
-			      cont.setModel(model, new AllLinksModel(mainview, model));
+			      cont.setModel(model,  new AllLinksModel(mainview, model), mainview);
+			      //cont.setModel(model, new AllLinksModel(mainview, model));
 			    } catch (IOException e) {
 			      e.printStackTrace();
 			    }

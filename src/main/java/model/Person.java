@@ -8,8 +8,8 @@ public class Person extends Page
 	String pronoun;
 	String email;
 	String phone;
-	String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer"};
-	String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
+	static final String[] roles_is = {"mentor", "contributor", "employee", "editor", "follower", "applicant", "friend", "viewer", "following"};
+	static final String[] roles_has = {"skill", "employer", "project", "news_article", "follower", "friend", "viewer", "editor", "mentor", "job_posting", "following"};
 	/**
 	 * @return the pronoun
 	 */
@@ -54,6 +54,7 @@ public class Person extends Page
 	@Override
 	public String[] getRolesHas()
 	{
+		System.out.println(roles_has);
 		
 		return roles_has;
 	}
@@ -137,7 +138,7 @@ public class Person extends Page
 		return false;	
 	}
 	
-	public boolean canEdit(Page p) throws ClassIncompatibleException
+	public boolean canEdit(Page p) //throws ClassIncompatibleException
 	{
 		if(p.page_links.containsKey("editor"))
 		{
@@ -145,12 +146,13 @@ public class Person extends Page
 			{
 				return true;
 			}
-			return false;
+			
 		}
-		else
+		return false;
+		/*else
 		{
 			throw new ClassIncompatibleException();
-		}
+		}*/
 	}
 	
 	public String toString()
@@ -159,11 +161,11 @@ public class Person extends Page
 	}
 	public void setRoles_has(String[] roles_has)
 	{
-		this.roles_has = roles_has;
+		//this.roles_has = roles_has;
 	}
 	public void setRoles_is(String[] roles_is)
 	{
-		this.roles_is = roles_is;
+		//this.roles_is = roles_is;
 	}
 	@Override
 	public PageModel makeModel()

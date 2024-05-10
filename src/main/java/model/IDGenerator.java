@@ -6,6 +6,10 @@ public class IDGenerator
 	private int id;
 	private  static IDGenerator uniqueInstance; 
 	
+	public void reset()
+	{
+		id = -1;
+	}
 	private IDGenerator() 
 	{
 		this.id = -1;

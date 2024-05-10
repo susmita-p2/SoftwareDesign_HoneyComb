@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<ScrollPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.PageFollowedController">
    <content>
       <VBox prefHeight="350.0" prefWidth="600.0">
          <children>
@@ -40,10 +40,15 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#onUnfollowClick" text="Unfollow" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                  <Button id="unfollowButton" minWidth="120.0" mnemonicParsing="false" onAction="#onUnfollowClick" text="Unfollow" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+                  <Button id="linksButton" mnemonicParsing="false" onAction="#onLinksClick" text="Links" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>

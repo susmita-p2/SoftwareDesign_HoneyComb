@@ -40,7 +40,7 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#onFollowClick" text="Follow" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
+                  <Button id="followButton" mnemonicParsing="false" onAction="#onFollowClick" text="Follow" GridPane.columnIndex="3" GridPane.halignment="RIGHT">
                      <GridPane.margin>
                         <Insets right="10.0" />
                      </GridPane.margin>
@@ -48,7 +48,7 @@
                         <Font size="18.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onLinksClick" text="My Links" GridPane.columnIndex="2">
+                  <Button id="linksButton" mnemonicParsing="false" onAction="#onLinksClick" text="My Links" GridPane.columnIndex="2">
                      <font>
                         <Font size="18.0" />
                      </font>

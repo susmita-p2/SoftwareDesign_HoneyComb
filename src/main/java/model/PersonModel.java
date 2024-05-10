@@ -1,18 +1,14 @@
 package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
-import javafx.beans.property.SimpleMapProperty;
-import java.util.HashMap;
+import javafx.scene.layout.BorderPane;
 
 public class PersonModel extends PageModel
 {
 	private StringProperty email;
 	private StringProperty pronoun;
 	private StringProperty phone;
-	
+	PageModel pg;
 	public PersonModel(Page p)
 	{
 		super(p);
@@ -45,6 +41,11 @@ public class PersonModel extends PageModel
 	}
 	public void setPhone(StringProperty phone) {
 		this.phone = phone;
+	}
+	@Override
+	public PageTransitionModel create_transition(BorderPane view)
+	{
+		return new PersonTransitionModel(view, this);
 	}
 	
 	

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class JobPosting extends Page
 {
-	static String[] roles_is = { "job_posting"};
-	static String[] roles_has = { "employer","editor","applicant", "skill", "mentor", "viewer", "contributor"};
+	static String[] roles_is = { "job_posting", "following"};
+	static String[] roles_has = { "employer","editor","applicant", "skill", "mentor", "viewer", "contributor", "follower"};
 	Recommender recommender;
 	
 	public JobPosting(String name, String description, Recommender recommender)

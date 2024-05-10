@@ -40,7 +40,9 @@ public class TestLogin implements LoginNavigationModelInterface
 	
 		loginClick = 0;
 		homeClick = 0;
+		PopulateRest.main(null);
 	    FXMLLoader loader = new FXMLLoader();
+	    //loader.setLocation(Main.class.getResource("../views/BackgroundView.fxml"));
 	    loader.setLocation(Main.class.getResource("../views/BackgroundView.fxml"));
 		 BorderPane view = null;
 		try
@@ -58,9 +60,9 @@ public class TestLogin implements LoginNavigationModelInterface
 	    {
 	    	System.out.println("SHIT");
 	    }
-	    //LoginNavigationModelInterface navModel = new LoginNavigationModel(view); 
+	    LoginNavigationModelInterface navModel = new LoginNavigationModel(view); 
 
-	    cont.setModel(this);
+	    cont.setModel(navModel);
 	    
 	    this.showLogin();
 	   
@@ -87,14 +89,18 @@ public class TestLogin implements LoginNavigationModelInterface
 		enterUser(robot,"1");
 		enterPassword(robot,"1");
 		robot.clickOn("#loginButton");
-		System.out.println(loginClick);
+		//System.out.println(loginClick);
 		Assertions.assertThat(loginClick).isEqualTo(1);
-		
+		robot.clickOn("#logoutButton");
+		Assertions.assertThat(homeClick).isEqualTo(1);
 		enterUser(robot,"");
 		enterPassword(robot,"");
 		robot.clickOn("#loginButton");
-		System.out.println(loginClick);
+		//System.out.println(loginClick);
+		//robot.clickOn("#logoutButton");
+		Assertions.assertThat(homeClick).isEqualTo(1);
 		Assertions.assertThat(loginClick).isEqualTo(1);
+		
 		
 	}
 
@@ -104,6 +110,38 @@ public class TestLogin implements LoginNavigationModelInterface
 	public void showHomepage(String username)
 	{
 		homeClick++;	
+		  FXMLLoader homeLoader = new FXMLLoader();
+		    FXMLLoader personLoader = new FXMLLoader();
+		    PersonModel personModel;
+		    Page x = (Person)RestStorage.pull_request(username);
+		    personModel = new PersonModel(x);
+		   
+		    try {
+		    	
+		    //set top
+			  homeLoader.setLocation(LoginNavigationModel.class
+				      .getResource("../views/Home.fxml"));
+
+		      Pane topBanner = homeLoader.load();
+		      HomeBarController cont = homeLoader.getController();
+		  	  HomeTransitionModel homeTransitionModel = new HomeTransitionModel(mainview, personModel);
+		      cont.setModel(homeTransitionModel);
+		      mainview.setTop(topBanner);
+		      
+		    //set center
+			  personLoader.setLocation(LoginNavigationModel.class
+				      .getResource("../views/PersonCanEditView.fxml"));
+
+		      Node center = (Node)personLoader.load();
+		      PersonCanEditController personCont = personLoader.getController();
+		      
+		  	  PersonTransitionModel personTransitionModel = new PersonTransitionModel(mainview,personModel);
+		      personCont.setModel(personModel, personTransitionModel);
+		      mainview.setCenter(center);	      
+		      
+		    } catch (IOException e) {
+		      e.printStackTrace();
+		    }
 	}
 
 	@Override
@@ -122,7 +160,7 @@ public class TestLogin implements LoginNavigationModelInterface
 	      
 	      
 	    } catch (IOException e) {
-	      // TODO Auto-generated catch block
+	     
 	      e.printStackTrace();
 	    }
 		

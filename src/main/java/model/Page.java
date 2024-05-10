@@ -18,6 +18,12 @@ public abstract class Page
 		this.id = genID.getNextID();
 		this.name = name;
 		this.description = description;
+		
+		String[] roles = this.getRolesHas();
+		for (int i = 0; i < roles.length; i++)
+		{
+			page_links.put(roles[i], new ArrayList<String>());
+		}
 	
 	}
 	public Page(){}
@@ -185,7 +191,7 @@ public abstract class Page
 		}
 		return false;
 	}
-	public abstract String[]  getRolesHas();
+	public abstract String[] getRolesHas();
 	public abstract String[] getRolesIs();
 	/**
 	 * @param page_links the page_links to set

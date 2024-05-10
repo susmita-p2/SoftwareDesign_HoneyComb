@@ -6,46 +6,46 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CompanyLinksController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.CompanyLinksController">
    <top>
       <FlowPane prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="personPageTypeBtn" mnemonicParsing="false" onAction="#onEmployeButtonClick" text="Employee">
+            <Button fx:id="employeeButton" mnemonicParsing="false" onAction="#onEmployeButtonClick" text="Employee">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="companyPageTypeBtn" mnemonicParsing="false" onAction="#onJobButtonClick" text="Job Posting">
+            <Button id="jobButton" fx:id="jobPostingButton" mnemonicParsing="false" onAction="#onJobButtonClick" text="Job Posting">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="skillPageTypeBtn" mnemonicParsing="false" onAction="#onFollowerButtonClick" text="Follower">
+            <Button id="followerButton" fx:id="followerButton" mnemonicParsing="false" onAction="#onFollowerButtonClick" text="Follower">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="jobPostingPageTypeBtn" mnemonicParsing="false" onAction="#onViewerButtonClick" text="Viewer">
+            <Button fx:id="viewerButton" mnemonicParsing="false" onAction="#onViewerButtonClick" text="Viewer">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="projectPageTypeBtn" mnemonicParsing="false" onAction="#onProjectButtonClick" text="Project">
+            <Button fx:id="projectButton" mnemonicParsing="false" onAction="#onProjectButtonClick" text="Project">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="newsArticlePageTypeBtn" mnemonicParsing="false" onAction="#onNewsArticleButtonClick" text="News Article">
+            <Button fx:id="newsArticleButton" mnemonicParsing="false" onAction="#onNewsArticleButtonClick" text="News Article">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="personPageTypeBtn1" mnemonicParsing="false" onAction="#onMentorButtonClick" text="Mentor">
+            <Button fx:id="mentorButton" mnemonicParsing="false" onAction="#onMentorButtonClick" text="Mentor">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="personPageTypeBtn2" mnemonicParsing="false" onAction="#onEditorButtonClick" text="Editor">
+            <Button fx:id="editorButton" mnemonicParsing="false" onAction="#onEditorButtonClick" text="Editor">
                <font>
                   <Font size="19.0" />
                </font>
@@ -54,6 +54,6 @@
       </FlowPane>
    </top>
    <center>
-      <ListView fx:id="allLinksListView" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView id="listView" fx:id="allLinksListView" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

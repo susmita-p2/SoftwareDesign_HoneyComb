@@ -8,7 +8,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import model.PageModel;
-import views.ItemCellController;
 
 public class ItemListCell extends ListCell<PageModel>
 {

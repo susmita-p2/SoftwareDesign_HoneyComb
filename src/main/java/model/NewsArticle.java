@@ -5,7 +5,7 @@ package model;
 public class NewsArticle extends Page
 {
 
-	static String[] roles_is = {"news_article"};
+	static String[] roles_is = {"news_article", "following"};
 	static String[] roles_has = { "editor","contributor","mentor","viewer"};
 	public NewsArticle(String name, String description)
 	{

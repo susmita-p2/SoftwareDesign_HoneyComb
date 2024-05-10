@@ -1,13 +1,8 @@
 package views;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
-import java.util.Set;
-
 import javafx.beans.binding.Bindings;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ObservableList;
 //import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import model.PageModel;
 import model.PersonModel;
 import model.PersonTransitionModel;
 import model.RestStorage;
@@ -59,9 +55,9 @@ public class PersonEditController implements Initializable{
     	
  
     }
-    public void setModel(PersonModel newModel, PersonTransitionModel transitionModel)
+    public void setModel(PageModel newModel, PersonTransitionModel transitionModel)
     {
-    	model = newModel;
+    	model = (PersonModel)newModel;
     	transition = transitionModel;
     	
     	/*nameField.setText(model.getName().get()); 
@@ -90,7 +86,7 @@ public class PersonEditController implements Initializable{
     	model.getDescription().setValue(descriptionField.getText());
     	
     	model.getPage().setName(nameField.getText());
-    	model.getPage().setDescription(emailField.getText());
+    	model.getPage().setDescription(descriptionField.getText());
     	model.getPage().setEmail(emailField.getText());
     	model.getPage().setPronoun(pronounsField.getText());
     	model.getPage().setPhone(phoneField.getText());

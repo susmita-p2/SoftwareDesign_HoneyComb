@@ -6,10 +6,10 @@ public class AllLinksModel
 {
 	BorderPane mainview;
 	PersonModel model;
-	public AllLinksModel(BorderPane mainview, PersonModel model)
+	public AllLinksModel(BorderPane mainview, PageModel model)
 	{
 		super();
 		this.mainview = mainview;
-		this.model = model;
+		this.model = (PersonModel)model;
 	}
 }

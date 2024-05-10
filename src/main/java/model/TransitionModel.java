@@ -4,9 +4,9 @@ import javafx.scene.layout.BorderPane;
 
 public abstract class TransitionModel {
 	BorderPane mainview;
-	PersonModel model;
-	public TransitionModel(BorderPane view, PersonModel newModel) {
-		mainview = view;
+	PageModel model;
+	public TransitionModel(BorderPane view, PageModel newModel) {
+		this.mainview = view;
 		model = newModel;
 	}
 	public abstract void showEditable();

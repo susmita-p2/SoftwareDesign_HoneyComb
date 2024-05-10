@@ -2,16 +2,16 @@ package views;
 
 import javafx.fxml.FXML;
 import model.DirectoryTransitionModel;
-import model.PersonModel;
+import model.PageModel;
 import javafx.event.ActionEvent;
 
 public class DirectoryController {
 
-	PersonModel person;
+	PageModel person;
 	DirectoryTransitionModel dirModel;
 	
-	public void setModel(PersonModel person, DirectoryTransitionModel dirModel) {
-		this.person = person;
+	public void setModel(PageModel model, DirectoryTransitionModel dirModel) {
+		this.person = model;
 		this.dirModel = dirModel;
 	}
     @FXML

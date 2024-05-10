@@ -10,52 +10,57 @@
    <top>
       <FlowPane prefHeight="100.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="personPageTypeBtn" mnemonicParsing="false" onAction="#onEmployerButtonClick" text="Employer">
+            <Button id="employerButton" fx:id="employerButton" mnemonicParsing="false" onAction="#onEmployerButtonClick" text="Employer">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="companyPageTypeBtn" mnemonicParsing="false" onAction="#onFriendButtonClick" text="Friend">
+            <Button id="friendButton" fx:id="friendButton" mnemonicParsing="false" onAction="#onFriendButtonClick" text="Friend">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="skillPageTypeBtn" mnemonicParsing="false" onAction="#onFollowerButtonClick" text="Follower">
+            <Button fx:id="followerButton" mnemonicParsing="false" onAction="#onFollowerButtonClick" text="Follower">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="jobPostingPageTypeBtn" mnemonicParsing="false" onAction="#onFollowingButtonClick" text="Following">
+            <Button id="followingButton" fx:id="followingButton" mnemonicParsing="false" onAction="#onFollowingButtonClick" text="Following">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="projectPageTypeBtn" mnemonicParsing="false" onAction="#onProjectButtonClick" text="Project">
+            <Button fx:id="projectButton" mnemonicParsing="false" onAction="#onProjectButtonClick" text="Project">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="newsArticlePageTypeBtn" mnemonicParsing="false" onAction="#onNewsArticleButtonClick" text="News Article">
+            <Button fx:id="newsArticleButton" mnemonicParsing="false" onAction="#onNewsArticleButtonClick" text="News Article">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="personPageTypeBtn1" mnemonicParsing="false" onAction="#onMentorButtonClick" text="Mentor">
+            <Button fx:id="mentorButton" mnemonicParsing="false" onAction="#onMentorButtonClick" text="Mentor">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="personPageTypeBtn2" mnemonicParsing="false" onAction="#onViewerButtonClick" text="Viewer">
+            <Button fx:id="viewerButton" mnemonicParsing="false" onAction="#onViewerButtonClick" text="Viewer">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button fx:id="personPageTypeBtn3" mnemonicParsing="false" onAction="#onViewerButtonClick" text="Editor">
+            <Button fx:id="editorButton" mnemonicParsing="false" onAction="#onEditorButtonClick" text="Editor">
                <font>
                   <Font size="19.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#onClickAmazon" style="-fx-background-color: Pink;" text="Amazon">
+            <Button fx:id="skillButton" mnemonicParsing="false" onAction="#onSkillButtonClick" text="Skill">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="jobPostingButton" mnemonicParsing="false" onAction="#onJobPostingButtonClick" text="JobPosting">
                <font>
                   <Font size="18.0" />
                </font>
@@ -64,6 +69,6 @@
       </FlowPane>
    </top>
    <center>
-      <ListView fx:id="allLinksListView" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView id="listView" fx:id="allLinksListView" prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
